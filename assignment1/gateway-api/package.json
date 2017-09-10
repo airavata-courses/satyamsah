@@ -1,0 +1,18 @@
+{
+  "name": "gateway",
+  "version": "1.0.0",
+  "description": "gateway for requests",
+  "main": "gateway.js",
+  "scripts": {
+    "start": "node api/gateway.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kumar Satyam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
