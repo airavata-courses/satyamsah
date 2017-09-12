@@ -14,9 +14,9 @@ Steps to run the application in web-ui server on docker:
 
 1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring)
 
-2)  `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
+2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard . `
 
-3)  `sudo docker run -p 9090:9090 spring-boot-web-interface`
+3)  `sudo docker run -p 9090:9090 spring-boot-employee-onboard`
 
 
 Make sure the web application is also running on 7778.
