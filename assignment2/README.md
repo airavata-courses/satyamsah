@@ -1,6 +1,14 @@
 
 # Employee-Department-Salary Service
 
+Steps to run the application in docker:
+
+1. sudo docker build -f Dockerfile -t spring-boot-web-interface .
+
+2  sudo docker run -p 7778:7778 spring-boot-web-interface
+
+Make sure the web application is also running on 7778.
+
 ![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
 ## Description
 It is microservice architecture using 3 service. In this project we are assuming that an employee working in a department will have same salary as the other employee working in the same department with same designation.So we can fetch the salary of the employee using the mapping of department and employee :
