@@ -1,11 +1,23 @@
 
 # Employee-Department-Salary Service
 
-Steps to run the application in docker:
+Steps to run the web-ui server on docker :
+1) cd to [web-interface](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/web-interfaces)
 
-1. sudo docker build -f Dockerfile -t spring-boot-web-interface .
+2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
 
-2  sudo docker run -p 7778:7778 spring-boot-web-interface
+3)  `sudo docker run -p 8090:8090 spring-boot-web-interface`
+
+
+
+Steps to run the application in web-ui server on docker:
+
+1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring)
+
+2)  `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
+
+3)  `sudo docker run -p 9090:9090 spring-boot-web-interface`
+
 
 Make sure the web application is also running on 7778.
 
