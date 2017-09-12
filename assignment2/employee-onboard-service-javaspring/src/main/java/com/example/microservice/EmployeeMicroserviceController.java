@@ -1,6 +1,8 @@
 package com.example.microservice;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -28,6 +30,9 @@ public class EmployeeMicroserviceController {
 
 	@Autowired
 	EmployeeRepository employeerepo;
+
+	@Autowired
+	Client rpcClient;
 
 	@RequestMapping(value = "/greeting", method = RequestMethod.GET)
 	public String getRequest() {
@@ -68,12 +73,36 @@ public class EmployeeMicroserviceController {
 					list.add(emp.getDept());
 					list.add(emp.getDesignation());
 					System.out.println(emp.getDept() + ":" + emp.getDesignation());
-					String uri = "http://localhost:3000/getAllSalarySlab/" + emp.getDept() + "/" + emp.getDesignation();
-					System.out.println("uri:" + uri);
-					RestTemplate restTemplate = new RestTemplate();
-					String result = restTemplate.getForObject(uri, String.class);
-					System.out.println(result);
-					return "Salary of " + emp.getName() + " is $ " + result;
+
+					// --------------------RMQ Logic Start-----------------------//
+					Client rpc = null;
+					String response = null;
+					try {
+						rpc = new Client();
+						String finalmessage = emp.getDept() + "," + emp.getDesignation();
+						System.out.println(" [x] Requesting fib(20)");
+						response = rpc.call(finalmessage);
+						System.out.println(" [.] Got '" + response + "'");
+					} catch (IOException | TimeoutException | InterruptedException e) {
+						e.printStackTrace();
+					} finally {
+						if (rpc != null) {
+							try {
+								rpc.close();
+							} catch (IOException _ignore) {
+							}
+						}
+					}
+					// --------------------RMQ Logic ENDs-----------------------//
+
+					// String uri = "http://localhost:3000/getAllSalarySlab/" +
+					// emp.getDept() + "/" + emp.getDesignation();
+					// System.out.println("uri:" + uri);
+					// RestTemplate restTemplate = new RestTemplate();
+					// String result = restTemplate.getForObject(uri,
+					// String.class);
+					// System.out.println(result);
+					return "Salary of " + emp.getName() + " is $ " + response.toString();
 				} else
 					continue;
 			}
