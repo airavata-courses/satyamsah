@@ -17,9 +17,9 @@ Dockerized mysql :
 
 2) `sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
 
-3) `docker exec -it my-container-name mysql -uroot -p` and give the password set for the mysql connection.
+3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
 
-4) `docker exec -it my-container-name bash` and  `mysql -u root -p`
+4) `sudo docker exec -it mysql-containe bash` and  `mysql -u root -p`
 
 Steps to run the application in web-ui server on docker:
 
