@@ -8,12 +8,12 @@ Steps to run the web-ui server on docker :
 
 3)  `sudo docker run -p 8090:8090 spring-boot-web-interface`
 
-4) `docker restart conatinerid` 
+4) `sudo docker restart conatinerid` 
 
 
 Dockerized mysql :
 
-1) `docker pull mysql/mysql-server`
+1) `sudo docker pull mysql/mysql-server`
 
 2) `sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
 
