@@ -11,7 +11,7 @@ Steps to run the web-ui server on docker :
 4) `docker restart conatinerid` 
 
 
-# Dockerized mysql
+Dockerized mysql :
 
 1) `docker pull mysql/mysql-server`
 
