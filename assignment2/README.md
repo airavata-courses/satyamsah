@@ -8,6 +8,8 @@ Steps to run the web-ui server on docker :
 
 3)  `sudo docker run -p 8090:8090 spring-boot-web-interface`
 
+4) docker restart conatinerid
+
 
 
 Steps to run the application in web-ui server on docker:
