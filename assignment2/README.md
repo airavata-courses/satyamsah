@@ -1,7 +1,7 @@
 
 # Employee-Department-Salary Service
 
-Steps to run the web-ui server on docker :
+###  Run the web-ui server on docker :
 1) cd to [web-interface](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/web-interfaces)
 
 2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
@@ -11,7 +11,7 @@ Steps to run the web-ui server on docker :
 4) `sudo docker restart conatinerid` 
 
 
-Dockerized mysql :
+### Deploy mysql on Docker:
 
 1) `sudo docker pull mysql/mysql-server`
 
@@ -20,34 +20,55 @@ Dockerized mysql :
 3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
 
 
-Database and tables:
+#### Database and tables:
 Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below:
 
 1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) : It is creating employee table to store emp id,name, dept,gender . 
 2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary.
 
-
-4) `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
-
+4) Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
 
-Steps for RMQ Configuration:
+### Steps for RMQ Installation:
+
+#### dockerized RMQ (Preferrable):
+
+1. type `docker pull rabbitmq`
+
+2. type `docker run -d --hostname "127.0.0.1" --name rabbit-container rabbitmq:3`
+
+#### Normal Installation :
 
 1. install RMQ by following the steps in the [link](https://tecadmin.net/install-rabbitmq-server-on-ubuntu/#) 
 
-Steps to run the application in web-ui server on docker:
 
-1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring)
+### run the application in java-spring service on docker:
 
-2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard . `
+1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring) :
 
-3)  `sudo docker run -p 9090:9090 spring-boot-employee-onboard`
+2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
-
-
+3)  `sudo docker run -p 9090:9090 spring-boot-employee-onboard-image`
 
 
-Make sure the web application is also running on 7778.
+### run the python-flask service on docker:
+
+1) cd to [department-salary service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
+
+2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
+
+3)  `sudo docker run -p 9090:9090 sudo docker run -p 5002:5002 python-dept-salary-image`
+
+
+
+### run the node-js service on docker:
+
+1) [getting the salary of an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
+
+2)  `sudo docker build -f Dockerfile -t nodejs-image . `
+
+3)  `sudo docker run -p 3000:3000 nodejs-image`
+
 
 ![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
 ## Description
