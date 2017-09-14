@@ -8,7 +8,32 @@ Steps to run the web-ui server on docker :
 
 3)  `sudo docker run -p 8090:8090 spring-boot-web-interface`
 
+4) `sudo docker restart conatinerid` 
 
+
+Dockerized mysql :
+
+1) `sudo docker pull mysql/mysql-server`
+
+2) `sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
+
+3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
+
+
+Database and tables:
+Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below:
+
+1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) : It is creating employee table to store emp id,name, dept,gender . 
+2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary.
+
+
+4) `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
+
+
+
+Steps for RMQ Configuration:
+
+1. install RMQ by following the steps in the [link](https://tecadmin.net/install-rabbitmq-server-on-ubuntu/#) 
 
 Steps to run the application in web-ui server on docker:
 
@@ -17,6 +42,9 @@ Steps to run the application in web-ui server on docker:
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard . `
 
 3)  `sudo docker run -p 9090:9090 spring-boot-employee-onboard`
+
+
+
 
 
 Make sure the web application is also running on 7778.
@@ -50,11 +78,7 @@ It is microservice architecture using 3 service. In this project we are assuming
 8. Install [npm](https://www.npmjs.com/get-npm) or in ubunut type `sudo apt-get install npm` 
 9. Check whether NPM is succesfully installed has been installed by typing `npm --version` on terminal/commandline
 
-## Database and tables:
-Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below:
 
-1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) : It is creating employee table to store emp id,name, dept,gender . 
-2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary.
 
 
 ## Booting the 3 micoservices, UI server, Gateway API server:
