@@ -1,6 +1,6 @@
-com\example\microservice\accounts\EmployeeRepository.class
-com\example\microservice\EmployeeServiceApplication.class
-com\example\microservice\EmployeeMicroserviceController.class
-com\example\microservice\accounts\Employee.class
-com\example\microservice\Client$1.class
-com\example\microservice\Client.class
+com/example/microservice/Client$1.class
+com/example/microservice/EmployeeServiceApplication.class
+com/example/microservice/EmployeeMicroserviceController.class
+com/example/microservice/Client.class
+com/example/microservice/accounts/Employee.class
+com/example/microservice/accounts/EmployeeRepository.class

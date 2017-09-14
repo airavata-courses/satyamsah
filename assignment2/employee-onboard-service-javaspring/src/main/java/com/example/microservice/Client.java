@@ -26,7 +26,7 @@ public class Client {
 
   public Client() throws IOException, TimeoutException {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("localhost");
+    factory.setHost("172.17.0.6");
 
     connection = factory.newConnection();
     channel = connection.createChannel();

@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, make_response, request
 
 import pymysql.cursors
-conn= pymysql.connect(host='localhost',user='salaryuser',passwd='ThePassword',db='salarydb',autocommit=True,cursorclass=pymysql.cursors.DictCursor)
+conn= pymysql.connect(host='172.17.0.2',user='salaryuser',passwd='ThePassword',db='salarydb',autocommit=True,cursorclass=pymysql.cursors.DictCursor)
 curr=conn.cursor()
 
 
@@ -34,7 +34,7 @@ def hello():
 
 
 if __name__ == '__main__':
-    app.run(port=5002, debug=True)
+    app.run(host='0.0.0.0', port=5002, debug=True)
 
 
 # @app.route('/getAllSalarySlab', methods=['GET'])

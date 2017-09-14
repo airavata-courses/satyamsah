@@ -12,7 +12,7 @@ const app = express();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : '172.17.0.2',
   user     : 'salaryuser',
   password : 'ThePassword',
   database : 'salarydb',
@@ -23,7 +23,7 @@ connection.connect();
 
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://localhost', function(err, conn) {
+amqp.connect('amqp://172.17.0.6', function(err, conn) {
   conn.createChannel(function(err, ch) {
     var q = 'rpc_queue';
 
@@ -53,6 +53,15 @@ amqp.connect('amqp://localhost', function(err, conn) {
   });
 });
 
+
+const PORT = 3030;
+const HOST = '0.0.0.0';
+
+
+// // Starting the server
+app.listen(PORT,HOST, function () {
+  console.log("App started on port 3000");
+});
 
 
 
@@ -108,9 +117,5 @@ amqp.connect('amqp://localhost', function(err, conn) {
 //   res.status(404).send("Wrong resource");
 // });
 
-// // Starting the server
-// app.listen(3000, function () {
-//   console.log("App started on port 3000");
-// });
 
 
