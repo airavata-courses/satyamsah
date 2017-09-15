@@ -1,4 +1,4 @@
-package com.example.microservice;
+package com.example.microservice.config;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -12,19 +12,17 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 
-@Component
-public class Client {
+public class RMQClient {
 
   private Connection connection;
   private Channel channel;
   private String requestQueueName = "rpc_queue";
   private String replyQueueName;
 
-  public Client() throws IOException, TimeoutException {
+  public RMQClient() throws IOException, TimeoutException {
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost("localhost");
 

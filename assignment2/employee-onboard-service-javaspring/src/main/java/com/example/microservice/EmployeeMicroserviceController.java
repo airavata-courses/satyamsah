@@ -22,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.microservice.accounts.Employee;
 import com.example.microservice.accounts.EmployeeRepository;
+import com.example.microservice.config.RMQClient;
+import com.example.microservice.config.RMQServer;
 
 @RestController
 @RequestMapping("/employee")
@@ -32,7 +34,10 @@ public class EmployeeMicroserviceController {
 	EmployeeRepository employeerepo;
 
 	@Autowired
-	Client rpcClient;
+	RMQClient rpcClient;
+	
+	@Autowired
+	RMQServer rpcServer;
 
 	@RequestMapping(value = "/greeting", method = RequestMethod.GET)
 	public String getRequest() {
@@ -75,10 +80,10 @@ public class EmployeeMicroserviceController {
 					System.out.println(emp.getDept() + ":" + emp.getDesignation());
 
 					// --------------------RMQ Logic Start-----------------------//
-					Client rpc = null;
+					RMQClient rpc = null;
 					String response = null;
 					try {
-						rpc = new Client();
+						rpc = new RMQClient();
 						String finalmessage = emp.getDept() + "," + emp.getDesignation();
 						System.out.println(" [x] Requesting fib(20)");
 						response = rpc.call(finalmessage);
