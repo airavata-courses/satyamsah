@@ -10,7 +10,10 @@
   "author": "Kumar Satyam",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "amqplib": "^0.5.1",
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
