@@ -13,7 +13,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 
 ###  Run the web-ui server on docker :
-1) cd to [web-interface](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/web-interfaces)
+1) cd to [web-interfaces](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/web-interfaces)
 
 2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
 
@@ -33,11 +33,10 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 #### Database and tables:
 Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below:
-
 1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) : It is creating employee table to store emp id,name, dept,gender . 
 2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary.
 
-Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
+Note (not an execution step): Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
 
 ### dockerized RMQ Installation (Preferrable):
@@ -50,7 +49,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 ### run the gateway api server on docker:
 
-1) cd to [api-gatway](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
+1) cd to [gateway-api](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
 
 2)  `sudo docker build -f Dockerfile -t gateway-image . `
 
@@ -63,7 +62,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 ### run the application in java-spring service on docker:
 
-1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring). As of now, the jar is getting created in local/dev machine,not in docker. :
+1) cd to [employee-onboard-service-javaspring](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring). As of now, the jar is getting created in local/dev machine,not in docker. :
 
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
@@ -73,7 +72,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 ### run the python-flask service on docker:
 
-1) cd to [department-salary service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
+1) cd to [create-deptmentandsalary-service-python](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
@@ -82,7 +81,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 ### run the node-js service on docker:
 
-1) cd to [getting the salary of an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
+1) cd to [fetch-salary-service-nodejs](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
 
 2)  `sudo docker build -f Dockerfile -t nodejs-image . `
 
