@@ -3,12 +3,12 @@ import pika;
 import ast;
 
 import pymysql.cursors
-conn= pymysql.connect(host='172.17.0.2',user='salaryuser',passwd='ThePassword',db='salarydb',autocommit=True,cursorclass=pymysql.cursors.DictCursor)
+conn= pymysql.connect(host='172.17.0.3',user='salaryuser',passwd='ThePassword',db='salarydb',autocommit=True,cursorclass=pymysql.cursors.DictCursor)
 curr=conn.cursor()
 
 app = Flask(__name__)
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.17.0.3'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.17.0.5'))
 
 channel = connection.channel()
 

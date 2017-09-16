@@ -35,7 +35,7 @@ app.post('/addSalaryGateway', function(req,res){
 
     var payload = require('amqplib/callback_api');
     
-    amqp.connect('amqp://172.17.0.3', function(err, conn) {
+    amqp.connect('amqp://172.17.0.5', function(err, conn) {
       conn.createChannel(function(err, ch) {
         ch.assertQueue('', {exclusive: true}, function(err, q) {
           var corr = generateUuid();
