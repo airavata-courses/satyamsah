@@ -46,7 +46,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 1. type `sudo docker pull rabbitmq`
 
-2. type `sudo docker run -d --name rmq-container --hostname rmq-container --hostname "127.0.0.1" --name rabbit-container rabbitmq:3`
+2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rabbit-container rabbitmq:3`
 
 #### Normal Installation :
 
