@@ -44,9 +44,9 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 #### dockerized RMQ (Preferrable):
 
-1. type `docker pull rabbitmq`
+1. type `sudo docker pull rabbitmq`
 
-2. type `docker run -d --name rmq-container --hostname rmq-container --hostname "127.0.0.1" --name rabbit-container rabbitmq:3`
+2. type `sudo docker run -d --name rmq-container --hostname rmq-container --hostname "127.0.0.1" --name rabbit-container rabbitmq:3`
 
 #### Normal Installation :
 
@@ -68,7 +68,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
-3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container -p 9090:9090 sudo docker run -p 5002:5002 python-dept-salary-image`
+3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container -p 5002:5002 python-dept-salary-image`
 
 
 
