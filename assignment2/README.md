@@ -66,7 +66,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
-3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container1 spring-boot-employee-onboard-image`
+3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container spring-boot-employee-onboard-image`
 
 
 
