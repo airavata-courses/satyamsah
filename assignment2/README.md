@@ -6,8 +6,10 @@
 ## Pre- requisite 
 1)  [docker](https://docs.docker.com/engine/installation/) should be insalled 
 
-Note(not a part of execution) : command to login to running container initeracting mode : `docker run -it image-name /bin/bash`
-Note(not a part of execution) to logininto a running container: sudo docker exec -it gatewaycontainer bash
+
+Note(not a part of execution) : command to start a container in interactive mode : `docker run -it image-name /bin/bash`
+
+Note(not a part of execution) to login into a running container: `sudo docker exec -it gatewaycontainer bash`
 
 
 ###  Run the web-ui server on docker :
