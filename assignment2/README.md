@@ -40,17 +40,25 @@ Create the 2 databases and 2 tables for employee and salaryslab by excuting the 
 Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
 
-### Steps for RMQ Installation:
-
-#### dockerized RMQ (Preferrable):
+#### dockerized RMQ Installation (Preferrable):
 
 1. type `sudo docker pull rabbitmq`
 
-2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rabbit-container rabbitmq:3`
+2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
 
-#### Normal Installation :
 
-1. install RMQ by following the steps in the [link](https://tecadmin.net/install-rabbitmq-server-on-ubuntu/#) 
+
+### run the gateway api server on docker:
+
+1) cd to [api-gatway](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
+
+2)  `sudo docker build -f Dockerfile -t gateway-image . `
+
+3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 --link rmq-container gateway-image`
+
+
+
+
 
 
 ### run the application in java-spring service on docker:
@@ -62,14 +70,14 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 spring-boot-employee-onboard-image`
 
 
+
 ### run the python-flask service on docker:
 
 1) cd to [department-salary service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
-3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container -p 5002:5002 python-dept-salary-image`
-
+3)  `ssudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link rmq-container --link mysql-container python-dept-salary-image`
 
 
 ### run the node-js service on docker:
@@ -81,14 +89,6 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 nodejs-image`
 
 
-
-### run the api server on docker:
-
-1) cd to [api-gatway](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
-
-2)  `sudo docker build -f Dockerfile -t gateway-image . `
-
-3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 ![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
 ## Description
@@ -104,6 +104,8 @@ It is microservice architecture using 3 service. In this project we are assuming
    It is use to invoke POST operation to create a table. It will have department, designation and salary. It means employees with same  designation in the same department will have same salary. It is written in "python and flask". It is running at port 5002.
 5) #### [getting the salary of an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
    While entering the employee Id you will get the salary of that employee.Its starting point is java-spring(running at port 9090) which is calling a service in "node-js" service(running at port 3000) to retrieve the information of salary.
+   
+6) RMQ : It is used as the communication carrier between api gateway and python service. I also act as communication career between Spring Java service and nodejs service .
 
 ### consuming the micoservies using UI. Type the following entries in browser.
 
