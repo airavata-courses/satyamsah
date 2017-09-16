@@ -12,7 +12,7 @@ const app = express();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : '172.17.0.2',
+  host     : 'mysql-container1',
   user     : 'salaryuser',
   password : 'ThePassword',
   database : 'salarydb',
@@ -23,7 +23,7 @@ connection.connect();
 
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://172.17.0.6', function(err, conn) {
+amqp.connect('amqp://rmq-container', function(err, conn) {
   conn.createChannel(function(err, ch) {
     var q = 'rpc_queue';
 
