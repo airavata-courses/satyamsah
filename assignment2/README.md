@@ -17,7 +17,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
 
-3)  `sudo docker run --name webui  --hostname webui -p 8090:8090 spring-boot-web-interface`
+3)  `sudo docker run --name webui-container  --hostname webui-container -p 8090:8090 spring-boot-web-interface`
 
 4) `sudo docker restart conatinerid` 
 
