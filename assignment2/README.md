@@ -40,7 +40,7 @@ Create the 2 databases and 2 tables for employee and salaryslab by excuting the 
 Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
 
-#### dockerized RMQ Installation (Preferrable):
+### dockerized RMQ Installation (Preferrable):
 
 1. type `sudo docker pull rabbitmq`
 
