@@ -12,7 +12,7 @@ const app = express();
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'mysql-container1',
+  host     : 'mysql-container',
   user     : 'salaryuser',
   password : 'ThePassword',
   database : 'salarydb',
