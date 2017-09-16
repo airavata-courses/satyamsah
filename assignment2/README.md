@@ -79,6 +79,13 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link rmq-container --link mysql-container python-dept-salary-image`
 
 
+
+###  Restart api-gateway
+1) sudo docker start api-gateway-container
+
+
+
+
 ### run the node-js service on docker:
 
 1) cd to [fetch-salary-service-nodejs](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
