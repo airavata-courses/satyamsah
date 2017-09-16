@@ -63,11 +63,11 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 ### run the application in java-spring service on docker:
 
-1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring) :
+1) cd to [employee-spring-service](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring). As of now, the jar is getting created in local/dev machine,not in docker. :
 
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
-3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 spring-boot-employee-onboard-image`
+3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container1 spring-boot-employee-onboard-image`
 
 
 
