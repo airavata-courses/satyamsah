@@ -78,6 +78,15 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 3)  `sudo docker run -p 3000:3000 nodejs-image`
 
 
+
+### run the api server on docker:
+
+1) cd to [api-gatway](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
+
+2)  `sudo docker build -f Dockerfile -t gateway-image . `
+
+3)  `sudo docker run -p 9999:9999 gateway-image`
+
 ![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
 ## Description
 It is microservice architecture using 3 service. In this project we are assuming that an employee working in a department will have same salary as the other employee working in the same department with same designation.So we can fetch the salary of the employee using the mapping of department and employee :
