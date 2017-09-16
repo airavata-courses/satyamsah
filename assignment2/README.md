@@ -77,7 +77,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
-3)  `ssudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link rmq-container --link mysql-container python-dept-salary-image`
+3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link rmq-container --link mysql-container python-dept-salary-image`
 
 
 ### run the node-js service on docker:
@@ -86,7 +86,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t nodejs-image . `
 
-3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 nodejs-image`
+3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link rmq-container --link mysql-container nodejs-image`
 
 
 
