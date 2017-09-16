@@ -81,7 +81,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 
 ###  Restart api-gateway
-1) sudo docker start api-gateway-container
+1) `sudo docker start api-gateway-container`
 
 
 
