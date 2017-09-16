@@ -17,7 +17,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
 
-3)  `sudo docker run -p 8090:8090 spring-boot-web-interface`
+3)  `sudo docker run --name webui  --hostname webui -p 8090:8090 spring-boot-web-interface`
 
 4) `sudo docker restart conatinerid` 
 
@@ -26,7 +26,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 1) `sudo docker pull mysql/mysql-server`
 
-2) `sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
+2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
 
 3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
 
@@ -46,7 +46,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 1. type `docker pull rabbitmq`
 
-2. type `docker run -d --hostname "127.0.0.1" --name rabbit-container rabbitmq:3`
+2. type `docker run -d --name rmq-container --hostname rmq-container --hostname "127.0.0.1" --name rabbit-container rabbitmq:3`
 
 #### Normal Installation :
 
@@ -59,7 +59,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
-3)  `sudo docker run -p 9090:9090 spring-boot-employee-onboard-image`
+3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 spring-boot-employee-onboard-image`
 
 
 ### run the python-flask service on docker:
@@ -68,7 +68,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
-3)  `sudo docker run -p 9090:9090 sudo docker run -p 5002:5002 python-dept-salary-image`
+3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container -p 9090:9090 sudo docker run -p 5002:5002 python-dept-salary-image`
 
 
 
@@ -78,7 +78,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t nodejs-image . `
 
-3)  `sudo docker run -p 3000:3000 nodejs-image`
+3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 nodejs-image`
 
 
 
@@ -88,7 +88,7 @@ Note : Other way to login is `sudo docker exec -it mysql-container bash` and  `m
 
 2)  `sudo docker build -f Dockerfile -t gateway-image . `
 
-3)  `sudo docker run -p 9999:9999 gateway-image`
+3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 ![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
 ## Description
