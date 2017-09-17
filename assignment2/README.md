@@ -53,7 +53,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 2)  `sudo docker build -f Dockerfile -t gateway-image . `
 
-3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 --link rmq-container gateway-image`
+3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
 
