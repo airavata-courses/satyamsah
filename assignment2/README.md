@@ -161,9 +161,9 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
    Department : IT  
    Salary: 20000  
    
-   In the command line : type `sudo docker start api-gateway-container` (open-bug)
+3) In the command line : type `sudo docker start api-gateway-container` (open-bug)
 
-3) Now,when navigate to `http://localhost:8090/FindSalary.html` and enter employee Id, e.g. 1 :
+4) Now,when navigate to `http://localhost:8090/FindSalary.html` and enter employee Id, e.g. 1 :
 
    Enter employee Id:(only numeric): 1  
 
