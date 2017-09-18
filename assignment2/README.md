@@ -73,17 +73,17 @@ check that the service is running on both the server:
 `sudo docker service ps myservice`
 
 
-### dockerized RMQ Installation (in remote server):
+#### switch to server2:dockerized RMQ Installation (in remote server):
 
 `docker run -d --hostname my-rmq --name my-rmq -e RABBITMQ_DEFAULT_USER=test -e RABBITMQ_DEFAULT_PASS=test -p 15672:15672  --net overnet rabbitmq:3-management`
 
-#### Skip this block
+##### Skip this block
 (1. type `cd custom-mq`
  2. `sudo docker build -f Dockerfile -t custom-rmq-img .`
  3. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`)
 
 
-### Deploy mysql on Docker(Server-1):
+### switch to server1: Deploy mysql on Docker:
 
 1) `sudo docker pull mysql/mysql-server`
 
