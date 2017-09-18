@@ -37,7 +37,7 @@ There is a modificaion in my use-case. I am having 2 RMQ instances. First,Native
 Secondly I have my RQM continainer running on the same server as micorservices. This will help me not to touch any code in the micoservice. And each of the micoservice can interat with each other. A more elegant way to do this is through docker-swarm which is under development in `v2-docker` repoistory.
 
 
-### Pre- requisite (Server1):(skip if docker is installed):
+### Pre- requisite (Server1 and Server2)::
 
 [docker](https://docs.docker.com/engine/installation/) should be insalled 
   
@@ -46,7 +46,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 2) `cd satyamsah/assignment2`
 3) `git checkout newdockerized`
 
-install docker :
+### install docker (skip if docker is installed)  :
 
 1) `chmod 777 installdocker.sh`
 2) `./installdocker.sh`
@@ -93,8 +93,10 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 #### intall RMQ in remote server 2:
 
-`cd satyamsah/assignment2`   (main github directory)
+`cd satyamsah/assignment2`  (main github directory)
+
 `chmod 777 rmqinstall.sh`
+
 `./rmqinstall.sh`
 
 #### dockerized RMQ Installation (server 1):
