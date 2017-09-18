@@ -3,7 +3,7 @@
 
 
 
-## Pre- requisite (Server1):
+## Pre- requisite (Server1):(skip if docker is installed):
 
 [docker](https://docs.docker.com/engine/installation/) should be insalled 
   
