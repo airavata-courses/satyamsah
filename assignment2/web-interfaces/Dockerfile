@@ -1,4 +1,16 @@
 FROM openjdk:8
-ADD target/demo-0.0.1-SNAPSHOT.jar employee-onboard-service-javaspring.jar
+
+ADD . /webdir
+WORKDIR /webdir
+
+RUN chmod 777 mvninstall.sh
+RUN pwd
+RUN ./mvninstall.sh
+
+RUN mvn clean install
+
+WORKDIR /webdir/target
+RUN pwd
 EXPOSE 8090
-ENTRYPOINT ["java","-jar","employee-onboard-service-javaspring.jar"]
+RUN pwd
+ENTRYPOINT ["java","-jar","demo-0.0.1-SNAPSHOT.jar"]

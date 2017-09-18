@@ -9,7 +9,7 @@ curr=conn.cursor()
 app = Flask(__name__)
 
 credentials = pika.PlainCredentials('test', 'test')
-connection = pika.BlockingConnection(pika.ConnectionParameters('149.165.157.170',5672,'/',credentials))
+connection = pika.BlockingConnection(pika.ConnectionParameters('my-rmq',5672,'/',credentials))
 
 channel = connection.channel()
 
