@@ -4,16 +4,26 @@
 
 
 ## Pre- requisite 
-1)  [docker](https://docs.docker.com/engine/installation/) should be insalled 
 
+[docker](https://docs.docker.com/engine/installation/) should be insalled 
+  
+1) `git clone https://github.com/airavata-courses/satyamsah.git`
+
+2) `cd satyamsah`
+3) `git checkout newdockerized`
+
+install docker :
+
+1) `chmod 777 installdocker.sh`
+2) `./installdocker.sh`
 
 Note(not a part of execution) : command to start a container in interactive mode : `docker run -it image-name /bin/bash`
 
 Note(not a part of execution) to login into a running container: `sudo docker exec -it gatewaycontainer bash`
 
 
-###  Run the web-ui server on docker :
-1) cd to [web-interfaces](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/web-interfaces)
+###  Run the web-ui server on docker(Server1):
+1) cd to [web-interfaces]
 
 2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
 
@@ -32,9 +42,19 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 
 #### Database and tables:
-Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below:
-1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) : It is creating employee table to store emp id,name, dept,gender . 
-2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary.
+Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below.[create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) :It is creating employee table to store emp id,name, dept,gender.[create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary
+
+1) `sudo docker pull mysql/mysql-server`
+
+2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d --net overnet mysql/mysql-server`
+
+3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
+
+execute the commands in the script inside mysql console:
+
+1) [create-employee.sql]
+
+2) [create-salaryslab.sql]
 
 Note (not an execution step): Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
@@ -51,7 +71,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 `chmod 777 rmqinstall.sh`
 `./rmqinstall.sh`
 
-#### dockerized RMQ Installation in the same server 1):
+#### dockerized RMQ Installation in the same server 1:
 
 1. type `sudo docker pull rabbitmq`
 
