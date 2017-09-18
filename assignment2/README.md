@@ -35,6 +35,9 @@ run `./firewall.sh`
 create a swarm manager in primary server:(server-1):
 `sudo docker swarm init --advertise-addr <localhost-ip>`
 
+copy the output command(in the following format):
+
+ `docker swarm join --token SWMTKN-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXfvhk205d2 XXX.XX.XX.XX:2377`
 
 #### switch to server2:
 
@@ -43,18 +46,19 @@ git clone : https://github.com/airavata-courses/satyamsah.git
 `cd satyamsah`
 `git checkout v2-docker`
 
-install docker
+##### install docker
 
 `chmod 777 installdocker.sh`
 `./installdocker.sh`
 
-open firewall ports(server-2):
+##### open firewall ports(server-2):
 
 `chmod 777 firewall.sh`
 
 run `./firewall.sh`
 
-run `docker swarm join --token SWMTKN-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXfvhk205d2 XXX.XX.XX.XX:2377`
+paste the command copied in the above step in server1:
+`docker swarm join --token SWMTKN-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXfvhk205d2 XXX.XX.XX.XX:2377`
 
 #### switch to server1:
 
