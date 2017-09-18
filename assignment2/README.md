@@ -87,7 +87,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
-### run the application in java-spring service on docker:
+### run the application in java-spring service on docker(Server1):
 
 1) cd to [employee-onboard-service-javaspring]. It is using server1 dockerized RMQ server :
 
@@ -96,16 +96,16 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container spring-boot-employee-onboard-image`
 
 
-### run the python-flask service on docker(using remote RMQ- situated in remote server2)):
+### run the python-flask service on docker(server-1):
 
-1) cd to [create-deptmentandsalary-service-python]:
+1) cd to [create-deptmentandsalary-service-python]. It is using remote RMQ- situated in remote server2:
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
 3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
 
 
-### run the node-js service on docker:
+### run the node-js service on docker(Server-1):
 
 1) cd to [fetch-salary-service-nodejs]:
 
