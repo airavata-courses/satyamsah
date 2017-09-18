@@ -1,7 +1,7 @@
 
 # Employee-Department-Salary Service
 
-We have 3 servers: First on which dockerized miroservices are installed. Second in which RMQ installed.Thisrd is for Jenkins.
+We have 3 servers: First on which dockerized miroservices are installed. Second in which RMQ installed.Third is for Jenkins.
 
 There is a modificaion in my use-case. I am having 2 RMQ instances. First,Native RMQ is running on a remote server(Server-2)(As per class use-case). I have completed this use-case. But here, I need to hardcode the ipaddress or hostname of remote RMQ inside my microservice code or microservie container /etc/hosts file. 
 
