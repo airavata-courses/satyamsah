@@ -2,6 +2,11 @@
 # Employee-Department-Salary Service
 
 
+git clone : https://github.com/airavata-courses/satyamsah.git
+
+cd satyamsah
+git checkout v2-docker
+
 
 ## Pre- requisite 
 1)  [docker](https://docs.docker.com/engine/installation/) should be insalled 
@@ -12,39 +17,91 @@ Note(not a part of execution) : command to start a container in interactive mode
 Note(not a part of execution) to login into a running container: `sudo docker exec -it gatewaycontainer bash`
 
 
-###  Run the web-ui server on docker :
-1) cd to [web-interfaces](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/web-interfaces)
+### Docker swarm 
 
-2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
+#### switch to server1: 
 
-3)  `sudo docker run --name webui-container  --hostname webui-container -p 8090:8090 spring-boot-web-interface`
+install docker :
 
-4) `sudo docker restart conatinerid` 
+`chmod 777 installdocker.sh`
+`./installdocker.sh`
+
+open firewall ports(server-1):
+
+`chmod 777 firewall.sh`
+
+run `./firewall.sh`
+
+create a swarm manager in primary server:(server-1):
+`sudo docker swarm init --advertise-addr <localhost-ip>`
 
 
-### Deploy mysql on Docker:
+#### switch to server2:
+
+git clone : https://github.com/airavata-courses/satyamsah.git
+
+`cd satyamsah`
+`git checkout v2-docker`
+
+install docker
+
+`chmod 777 installdocker.sh`
+`./installdocker.sh`
+
+open firewall ports(server-2):
+
+`chmod 777 firewall.sh`
+
+run `./firewall.sh`
+
+run `docker swarm join --token SWMTKN-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXfvhk205d2 XXX.XX.XX.XX:2377`
+
+#### switch to server1:
+
+Creating a overlay link :
+`sudo docker network create -d overlay --attachable overnet`
+
+check for the new network  :
+`sudo docker network ls`
+`sudo docker inspect overnet`
+
+creating a dummy service to link the two servers though  overlay link :
+
+`sudo docker service create --name myservice --network overnet --replicas 2 nginx`
+
+check that the service is running on both the server:
+`sudo docker service ps myservice`
+
+
+### dockerized RMQ Installation (in remote server):
+
+`docker run -d --hostname my-rmq --name my-rmq -e RABBITMQ_DEFAULT_USER=test -e RABBITMQ_DEFAULT_PASS=test -p 15672:15672  --net overnet rabbitmq:3-management`
+
+#### Skip this block
+(1. type `cd custom-mq`
+ 2. `sudo docker build -f Dockerfile -t custom-rmq-img .`
+ 3. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`)
+
+
+### Deploy mysql on Docker(Server-1):
 
 1) `sudo docker pull mysql/mysql-server`
 
-2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
+2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d --net overnet mysql/mysql-server`
 
 3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
 
 
 #### Database and tables:
 Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below:
+
+execute the commands in the script :
 1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) : It is creating employee table to store emp id,name, dept,gender . 
+
+execute the commands in the script:
 2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary.
 
 Note (not an execution step): Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
-
-
-### dockerized RMQ Installation (Preferrable):
-
-1. type `sudo docker pull rabbitmq`
-
-2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
-
 
 
 ### run the gateway api server on docker:
@@ -53,11 +110,29 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 2)  `sudo docker build -f Dockerfile -t gateway-image . `
 
-3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 --link rmq-container gateway-image`
+3)  `sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' api-gateway-container`
+
+4) `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 --link my-rmq --net overnet gateway-image`
+
+##### (info step: need not to execute) Steps to know the ip of new api container :
+
+`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' api-gateway-container`
+
+### run the python-flask service on docker:
+
+1) cd to [create-deptmentandsalary-service-python] :
+
+2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . . `
+
+3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link my-rmq  --link mysql-container --net overnet python-dept-salary-image`
 
 
+###  Run the web-ui server on docker :
+1) cd to [web-interfaces]
 
+2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
 
+3)  `sudo docker run --name webui-container --hostname webui-container -p 8090:8090 --link api-gateway-container --net overnet spring-boot-web-interface`
 
 
 ### run the application in java-spring service on docker:
@@ -66,17 +141,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
-3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container spring-boot-employee-onboard-image`
-
-
-
-### run the python-flask service on docker:
-
-1) cd to [create-deptmentandsalary-service-python](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
-
-2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
-
-3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link rmq-container --link mysql-container python-dept-salary-image`
+3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link my-rmq --link mysql-container spring-boot-employee-onboard-image`
 
 
 ### run the node-js service on docker:
@@ -85,7 +150,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 2)  `sudo docker build -f Dockerfile -t nodejs-image . `
 
-3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link rmq-container --link mysql-container nodejs-image`
+3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link my-rmq --link mysql-container nodejs-image`
 
 
 
