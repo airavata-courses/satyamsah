@@ -14,7 +14,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
   
 1) `git clone https://github.com/airavata-courses/satyamsah.git`
 
-2) `cd satyamsah`
+2) `cd satyamsah/assignment2`
 3) `git checkout newdockerized`
 
 install docker :
