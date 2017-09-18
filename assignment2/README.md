@@ -1,9 +1,14 @@
 
 # Employee-Department-Salary Service
 
+We have 3 servers: First on which dockerized miroservices are installed. Second in which RMQ installed.Thisrd is for Jenkins.
+
+There is a modificaion in my use-case. I am having 2 RMQ instances. First,Native RMQ is running on a remote server(Server-2)(As per class use-case). I have completed this use-case. But here, I need to hardcode the ipaddress or hostname of remote RMQ inside my microservice code or microservie container /etc/hosts file. 
+
+Secondly I have my RQM continainer running on the same server as micorservices. This will help me not to touch any code in the micoservice. And each of the micoservice can interat with each other. A more elegant way to do this is through docker-swarm which is under development in `v2-docker` repoistory.
 
 
-## Pre- requisite (Server1):(skip if docker is installed):
+### Pre- requisite (Server1):(skip if docker is installed):
 
 [docker](https://docs.docker.com/engine/installation/) should be insalled 
   
