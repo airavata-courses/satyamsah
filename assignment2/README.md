@@ -117,18 +117,22 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 1) cd to [create-deptmentandsalary-service-python]. It is using remote RMQ- situated in remote server2:
 
-2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
+2) edit the file and change the ipaddress for the rmq server with your remote rmq server. Save it
 
-3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
+3)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
+
+4)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
 
 
 ### run the gateway api server on docker(Server1):
 
 1) cd to [gateway-api].   It is using server2 RMQ: 
 
-2)  `sudo docker build -f Dockerfile -t gateway-image . `
+2)  edit the file and change the ipaddress for the rmq server with your remote rmq server. Save it
 
-3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
+3) `sudo docker build -f Dockerfile -t gateway-image . `
+
+4)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
 ### run the node-js service on docker(Server-1):
