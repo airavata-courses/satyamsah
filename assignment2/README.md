@@ -1,6 +1,35 @@
 
 # Employee-Department-Salary Service
 
+
+![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
+## Description
+It is microservice architecture using 3 service. In this project we are assuming that an employee working in a department will have same salary as the other employee working in the same department with same designation.So we can fetch the salary of the employee using the mapping of department and employee :
+
+1)  #### [UI interfaces](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/web-interfaces): The starting point is welcome page running on `http://localhost:8090/`. It is linked to all the UIs running on port 8090.
+
+2)  #### [API gateway](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): All the calls from each of UIs for respective microservice is calling respecting request mapping method in the API gateway service running in port 9999. It is written in node-js.
+
+3) #### [onboarding an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/employee-onboard-service-javaspring): 
+   It is used to register an employee . It will ask for basic info of new employee: Name,Designation, Department,Gender. It is written is "java-spring-boot". It is running at port 9090.
+4) #### [department-salary service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python):
+   It is use to invoke POST operation to create a table. It will have department, designation and salary. It means employees with same  designation in the same department will have same salary. It is written in "python and flask". It is running at port 5002.
+5) #### [getting the salary of an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
+   While entering the employee Id you will get the salary of that employee.Its starting point is java-spring(running at port 9090) which is calling a service in "node-js" service(running at port 3000) to retrieve the information of salary.
+   
+6) RMQ : It is used as the communication carrier between api gateway and python service. I also act as communication career between Spring Java service and nodejs service .
+
+### consuming the micoservies using UI. Type the following entries in browser.
+
+1) http://localhost:8090/: Welcome link for all the services. The links in the page will redirect to the following 3 mentioned web-links.
+
+2) http://localhost:8090/addemployee.html : It will ask for basic info of new employee: Name,Designation, Department,Gender. It will save the information in the employee table.The call will redirect to the gateway API port 9999.
+
+3) http://localhost:8090/addSalarySlab.html : It will ask for Department, Designation and Salary assigned. The salary is mapped to dept and designation. It will save the information in the salaryslab table.The call will redirect to the gateway API port 9999.
+
+4) http://localhost:8090/FindSalary.html : It will ask for Employee id to fetch the salary of the employee. Only numeric values are allowed. It will contact both the employee table and  salaryslab table. The employee id is auto-genreted numeric and is hidden from user's input. It starts from 1.The call will redirect to the gateway API port 9999.
+
+
 We have 3 servers: First on which dockerized miroservices are installed. Second in which RMQ installed.Third is for Jenkins.
 
 There is a modificaion in my use-case. I am having 2 RMQ instances. First,Native RMQ is running on a remote server(Server-2)(As per class use-case). I have completed this use-case. But here, I need to hardcode the ipaddress or hostname of remote RMQ inside my microservice code or microservie container /etc/hosts file. 
@@ -93,7 +122,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
 
 
-### run the gateway api server on docker(Server1).:
+### run the gateway api server on docker(Server1):
 
 1) cd to [gateway-api].   It is using server2 RMQ: 
 
@@ -111,34 +140,6 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link rmq-container --link mysql-container nodejs-image`
 
 
-
-![alt text](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/workflowdiagram.PNG)
-## Description
-It is microservice architecture using 3 service. In this project we are assuming that an employee working in a department will have same salary as the other employee working in the same department with same designation.So we can fetch the salary of the employee using the mapping of department and employee :
-
-1)  #### [UI interfaces](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/web-interfaces): The starting point is welcome page running on `http://localhost:8090/`. It is linked to all the UIs running on port 8090.
-
-2)  #### [API gateway](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): All the calls from each of UIs for respective microservice is calling respecting request mapping method in the API gateway service running in port 9999. It is written in node-js.
-
-3) #### [onboarding an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/employee-onboard-service-javaspring): 
-   It is used to register an employee . It will ask for basic info of new employee: Name,Designation, Department,Gender. It is written is "java-spring-boot". It is running at port 9090.
-4) #### [department-salary service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python):
-   It is use to invoke POST operation to create a table. It will have department, designation and salary. It means employees with same  designation in the same department will have same salary. It is written in "python and flask". It is running at port 5002.
-5) #### [getting the salary of an employee service](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
-   While entering the employee Id you will get the salary of that employee.Its starting point is java-spring(running at port 9090) which is calling a service in "node-js" service(running at port 3000) to retrieve the information of salary.
-   
-6) RMQ : It is used as the communication carrier between api gateway and python service. I also act as communication career between Spring Java service and nodejs service .
-
-### consuming the micoservies using UI. Type the following entries in browser.
-
-1) http://localhost:8090/: Welcome link for all the services. The links in the page will redirect to the following 3 mentioned web-links.
-
-2) http://localhost:8090/addemployee.html : It will ask for basic info of new employee: Name,Designation, Department,Gender. It will save the information in the employee table.The call will redirect to the gateway API port 9999.
-
-3) http://localhost:8090/addSalarySlab.html : It will ask for Department, Designation and Salary assigned. The salary is mapped to dept and designation. It will save the information in the salaryslab table.The call will redirect to the gateway API port 9999.
-
-4) http://localhost:8090/FindSalary.html : It will ask for Employee id to fetch the salary of the employee. Only numeric values are allowed. It will contact both the employee table and  salaryslab table. The employee id is auto-genreted numeric and is hidden from user's input. It starts from 1.The call will redirect to the gateway API port 9999.
-
 #### Proper Use-case scenario for testing end-to-end integration: 
 
 1) one needs to feed-in proper entry in `http://localhost:8090/addemployee.html`
@@ -153,6 +154,9 @@ It is microservice architecture using 3 service. In this project we are assuming
    Designation: SDE1  
    Department : IT  
    Salary: 20000  
+   
+
+   In the command line : type `sudo docker start api-gateway-container` (bug)
 
 3) Now,when navigate to `http://localhost:8090/FindSalary.html` and enter employee Id, e.g. 1 :
 
@@ -161,4 +165,6 @@ It is microservice architecture using 3 service. In this project we are assuming
 
 
    It will fetch you the salary.
+
+
 
