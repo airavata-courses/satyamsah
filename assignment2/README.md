@@ -3,7 +3,7 @@
 
 
 
-## Pre- requisite 
+## Pre- requisite (Server1):
 
 [docker](https://docs.docker.com/engine/installation/) should be insalled 
   
@@ -32,7 +32,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 4) `sudo docker restart conatinerid` 
 
 
-### Deploy mysql on Docker:
+### Deploy mysql on Docker(Server1):
 
 1) `sudo docker pull mysql/mysql-server`
 
@@ -67,29 +67,29 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 #### intall RMQ in remote server 2:
 
-`cd satyamsah`
+`cd satyamsah`(main github directory)
 `chmod 777 rmqinstall.sh`
 `./rmqinstall.sh`
 
-#### dockerized RMQ Installation in the same server 1:
+#### dockerized RMQ Installation (server 1):
 
 1. type `sudo docker pull rabbitmq`
 
 2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
 
 
-### run the gateway api server on docker(using remote RMQ- situated in remote server2):
+### run the gateway api server on docker(Server1).:
 
-1) cd to [gateway-api](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
+1) cd to [gateway-api]. It is using server2 RMQ server: 
 
 2)  `sudo docker build -f Dockerfile -t gateway-image . `
 
 3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
-### run the application in java-spring service on docker(using dockeried RMQ- situated in same server1):
+### run the application in java-spring service on docker:
 
-1) cd to [employee-onboard-service-javaspring](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring). As of now, the jar is getting created in local/dev machine,not in docker. :
+1) cd to [employee-onboard-service-javaspring]. It is using server1 dockerized RMQ server :
 
 2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
@@ -98,7 +98,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 ### run the python-flask service on docker(using remote RMQ- situated in remote server2)):
 
-1) cd to [create-deptmentandsalary-service-python](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
+1) cd to [create-deptmentandsalary-service-python]:
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
@@ -107,7 +107,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 ### run the node-js service on docker:
 
-1) cd to [fetch-salary-service-nodejs](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/fetch-salary-service-nodejs): 
+1) cd to [fetch-salary-service-nodejs]:
 
 2)  `sudo docker build -f Dockerfile -t nodejs-image . `
 
