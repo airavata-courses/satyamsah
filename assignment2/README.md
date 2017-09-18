@@ -52,9 +52,9 @@ Create the 2 databases and 2 tables for employee and salaryslab by excuting the 
 
 execute the commands in the script inside mysql console:
 
-1) [create-employee.sql]
+1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql)
 
-2) [create-salaryslab.sql]
+2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql)
 
 Note (not an execution step): Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
