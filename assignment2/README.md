@@ -65,7 +65,7 @@ paste the command copied in the above step in server1:
 Creating a overlay link :
 `sudo docker network create -d overlay --attachable overnet`
 
-check for the new network  :
+check for the new network :Skip this :
 `sudo docker network ls`
 `sudo docker inspect overnet`
 
@@ -73,7 +73,7 @@ creating a dummy service to link the two servers though  overlay link :
 
 `sudo docker service create --name myservice --network overnet --replicas 2 nginx`
 
-check that the service is running on both the server:
+check that the service is running on both the server:Skip this:
 `sudo docker service ps myservice`
 
 
@@ -118,7 +118,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 
 4) `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 --link my-rmq --net overnet gateway-image`
 
-##### (info step: need not to execute) Steps to know the ip of new api container :
+##### (info step: need not to execute) Steps to know the ip of new api container:Skip this :
 
 `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' api-gateway-container`
 
