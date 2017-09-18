@@ -70,7 +70,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 #### intall RMQ in remote server 2:
 
-`cd satyamsah`(main github directory)
+`cd satyamsah/assignment2`   (main github directory)
 `chmod 777 rmqinstall.sh`
 `./rmqinstall.sh`
 
@@ -79,15 +79,6 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 1. type `sudo docker pull rabbitmq`
 
 2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
-
-
-### run the gateway api server on docker(Server1).:
-
-1) cd to [gateway-api]. It is using server2 RMQ server: 
-
-2)  `sudo docker build -f Dockerfile -t gateway-image . `
-
-3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
 ### run the application in java-spring service on docker(Server1):
@@ -106,6 +97,15 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
 3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
+
+
+### run the gateway api server on docker(Server1).:
+
+1) cd to [gateway-api].   It is using server2 RMQ: 
+
+2)  `sudo docker build -f Dockerfile -t gateway-image . `
+
+3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
 ### run the node-js service on docker(Server-1):
