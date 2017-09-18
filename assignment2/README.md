@@ -43,7 +43,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
 
-3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
+3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection ie. `root123`.
 
 
 #### Database and tables:
