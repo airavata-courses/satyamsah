@@ -39,15 +39,26 @@ Create the 2 databases and 2 tables for employee and salaryslab by excuting the 
 Note (not an execution step): Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
 
-### dockerized RMQ Installation (Preferrable):
+
+### RMQ Intallation :
+There is a modificaion in my use-case. I am having 2 RMQ instances. First,Native RMQ is running on a remote server(Server-2)(As per class use-case). I have completed this use-case. But here , I need to hardcode the ipaddress or hostname of my microservice code or microservie container. 
+
+Secondly I have my RQM continainer running on the same server as micorservices. This will help me not to touch any code in the micoservice. And each of the micoservice can interat with each other. A more elegant way to do this is through docker-swarm which is under development in `v2-docker` repoistory.
+
+#### intall RMQ in remote server 2:
+
+`cd satyamsah`
+`chmod 777 rmqinstall.sh`
+`./rmqinstall.sh`
+
+#### dockerized RMQ Installation in the same server 1):
 
 1. type `sudo docker pull rabbitmq`
 
 2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
 
 
-
-### run the gateway api server on docker:
+### run the gateway api server on docker(using remote RMQ- situated in remote server2):
 
 1) cd to [gateway-api](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/gateway-api): 
 
@@ -56,11 +67,7 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 3)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
 
 
-
-
-
-
-### run the application in java-spring service on docker:
+### run the application in java-spring service on docker(using dockeried RMQ- situated in same server1):
 
 1) cd to [employee-onboard-service-javaspring](https://github.com/airavata-courses/satyamsah/tree/assignment2/assignment2/employee-onboard-service-javaspring). As of now, the jar is getting created in local/dev machine,not in docker. :
 
@@ -69,14 +76,13 @@ Note (not an execution step): Other way to login is `sudo docker exec -it mysql-
 3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container spring-boot-employee-onboard-image`
 
 
-
-### run the python-flask service on docker:
+### run the python-flask service on docker(using remote RMQ- situated in remote server2)):
 
 1) cd to [create-deptmentandsalary-service-python](https://github.com/airavata-courses/satyamsah/tree/master/assignment1/create-deptmentandsalary-service-python) :
 
 2)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
-3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link rmq-container --link mysql-container python-dept-salary-image`
+3)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
 
 
 ### run the node-js service on docker:
