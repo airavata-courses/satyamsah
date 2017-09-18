@@ -45,7 +45,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection ie. `root123`.
 
-
+4) exit the mysql console. It will run in the background
 #### Database and tables:
 Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below.[create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) :It is creating employee table to store emp id,name, dept,gender.[create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary
 
