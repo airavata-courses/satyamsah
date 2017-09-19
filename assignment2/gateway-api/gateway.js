@@ -50,7 +50,7 @@ app.post('/addSalaryGateway', function(req,res){
           ch.consume(q.queue, function(msg) {
             if (msg.properties.correlationId == corr) {
               console.log(' [.] Got %s', msg.content.toString());
-              setTimeout(function() { conn.close(); process.exit(0) }, 500);
+              setTimeout(function() { conn.close(); }, 500);
               res.send("salary slab added successfully");
             }
           }, {noAck: true});
