@@ -44,8 +44,11 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 1) `git clone https://github.com/airavata-courses/satyamsah.git`
 
 2) `cd satyamsah`
+
 3) `git checkout newdockerized`
+
 4)  `cd assignment2` 
+
 
 ### install docker (skip if docker is installed)  :
 
@@ -64,7 +67,7 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 
 3)  `sudo docker run --name webui-container  --hostname webui-container -p 8090:8090 spring-boot-web-interface`
 
-4) `sudo docker restart conatinerid` 
+
 
 
 ### Deploy mysql on Docker(Server1):
@@ -73,7 +76,7 @@ Create the 2 databases and 2 tables for employee and salaryslab by excuting the 
 
 1) `sudo docker pull mysql/mysql-server`
 
-2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d --net overnet mysql/mysql-server`
+2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
 
 3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
 
@@ -120,7 +123,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 1) cd to [create-deptmentandsalary-service-python]. It is using remote RMQ- situated in remote server2:
 
-2) edit the file and change the ipaddress for the rmq server with your remote rmq server. Save it
+2) edit the salary.py file and change the ipaddress (149.165.157.170) for the rmq server with your remote rmq server. Save it
 
 3)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
@@ -131,7 +134,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 1) cd to [gateway-api].   It is using server2 RMQ: 
 
-2)  edit the file and change the ipaddress for the rmq server with your remote rmq server. Save it
+2)  edit the file `gateway.js` and change the ipaddress (amqp://test:test@149.165.157.170) for the rmq server with your remote rmq server. Save it
 
 3) `sudo docker build -f Dockerfile -t gateway-image . `
 
@@ -162,9 +165,8 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
    Department : IT  
    Salary: 20000  
    
-3) In the command line : type `sudo docker start api-gateway-container` (open-bug)
 
-4) Now,when navigate to `http://localhost:8090/FindSalary.html` and enter employee Id, e.g. 1 :
+3) Now,when navigate to `http://localhost:8090/FindSalary.html` and enter employee Id, e.g. 1 :
 
    Enter employee Id:(only numeric): 1  
 
