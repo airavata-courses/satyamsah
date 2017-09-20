@@ -1,0 +1,29 @@
+node {
+   def mvnHome
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      checkout(
+          [$class: 'GitSCM', 
+          branches: [[name: 'newdockerized']], 
+          doGenerateSubmoduleConfigurations: false, 
+          extensions: [], 
+          submoduleCfg: [], 
+          userRemoteConfigs: [[url: 'https://github.com/airavata-courses/satyamsah.git']]
+          ]
+        )
+   }
+   
+   stage('Clean'){
+       sshagent (credentials: ['PK']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 129.114.104.65 rm -f /home/satyamsah/build.sh'
+            sh 'scp "/var/lib/jenkins/workspace/test/assignment2/build.sh" satyam1@129.114.104.65:/home/satyamsah/'
+        }
+    }
+       
+  
+   stage('Build') {
+      sshagent (credentials: ['PK']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 129.114.104.65 sudo bash /home/satyamsah/build.sh'
+    }
+   }
+}
