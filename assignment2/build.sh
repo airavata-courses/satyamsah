@@ -4,9 +4,9 @@
 echo -------------Build started-------------
 echo IN::$PWD;
 # Delete all containers
-docker rm -f $(docker ps -a -q) || echo No Docker images
+sudo docker rm -f $(sudo docker ps -a -q) || echo No Docker images
 # Delete all images
-docker rmi -f $(docker images -q) || echo No Docker containers
+sudo docker rmi -f $(sudo docker images -q) || echo No Docker containers
 sudo docker run -d --name webui-container --hostname webui-container -p 8090:8090 satyamsah/web-interface-image
 sudo docker run -d --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 satyamsah/mysql
 sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3
