@@ -63,29 +63,16 @@ Note(not a part of execution) to login into a running container: `sudo docker ex
 ###  Run the web-ui server on docker(Server1):
 1) cd to [web-interfaces]
 
-2) `sudo docker build -f Dockerfile -t spring-boot-web-interface . `
-
-3)  `sudo docker run --name webui-container  --hostname webui-container -p 8090:8090 spring-boot-web-interface`
-
-
+2)  `sudo docker run --name webui-container  --hostname webui-container -p 8090:8090 satyamsah/web-interface-image`
 
 
 ### Deploy mysql on Docker(Server1):
 #### Database and tables:
 Create the 2 databases and 2 tables for employee and salaryslab by excuting the mysql scripts.To do so, install any mysql client preferebly [mysql workbench](https://www.mysql.com/products/workbench) to run mysql scripts below.[create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql) :It is creating employee table to store emp id,name, dept,gender.[create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql) : It is creating a salaryslab table with dept , deignation and salary as columns.The reason is to create a relation between department and designation to map them to fixed salary.It means employees with same designation in the same department will have same salary
 
-1) `sudo docker pull mysql/mysql-server`
+2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d satyamsah/mysql`
 
-2) `sudo docker run --name mysql-container --hostname mysql-container -e MYSQL_ROOT_PASSWORD=root123 -d mysql/mysql-server`
-
-3) `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
-
-execute the commands in the script inside mysql console:
-
-1) [create-employee.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-employee.sql)
-
-2) [create-salaryslab.sql](https://github.com/airavata-courses/satyamsah/blob/master/assignment1/sqlscript/create-salaryslab.sql)
-
+Note (not an execution step):  `sudo docker exec -it mysql-container mysql -uroot -p` and give the password set for the mysql connection.
 Note (not an execution step): Other way to login is `sudo docker exec -it mysql-container bash` and  `mysql -u root -p`
 
 Note : exit the mysql console. It will run in the background
@@ -105,18 +92,16 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 #### dockerized RMQ Installation (server 1):
 
-1. type `sudo docker pull rabbitmq`
 
-2. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
+1. type `sudo docker run -d --name rmq-container --hostname rmq-container --name rmq-container rabbitmq:3`
 
 
 ### run the application in java-spring service on docker(Server1):
 
 1) cd to [employee-onboard-service-javaspring]. It is using server1 dockerized RMQ server :
 
-2)  `sudo docker build -f Dockerfile -t spring-boot-employee-onboard-image . `
 
-3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container spring-boot-employee-onboard-image`
+3)  `sudo docker run --name create-emp-container --hostname create-emp-container -p 9090:9090 --link rmq-container --link mysql-container satyamsah/employee-onboard-image`
 
 
 ### run the python-flask service on docker(server-1):
@@ -127,7 +112,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 3)  `sudo docker build -f Dockerfile -t python-dept-salary-image . `
 
-4)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container python-dept-salary-image`
+4)  `sudo docker run --name create-salaryslab-container --hostname create-salaryslab-container --link mysql-container satyamsah/create-salaryslab-image`
 
 
 ### run the gateway api server on docker(Server1):
@@ -138,7 +123,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 3) `sudo docker build -f Dockerfile -t gateway-image . `
 
-4)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 gateway-image`
+4)  `sudo docker run --name api-gateway-container --hostname api-gateway-container -p 9999:9999 satyamsah/gateway-image`
 
 
 ### run the node-js service on docker(Server-1):
@@ -147,7 +132,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 2)  `sudo docker build -f Dockerfile -t nodejs-image . `
 
-3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link rmq-container --link mysql-container nodejs-image`
+3)  `sudo docker run --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link rmq-container --link mysql-container satyamsah/fetch-salary-image`
 
 
 #### Proper Use-case scenario for testing end-to-end integration: 
