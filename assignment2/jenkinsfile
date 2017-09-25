@@ -4,7 +4,7 @@ node {
       // Get some code from a GitHub repository
       checkout(
           [$class: 'GitSCM', 
-          branches: [[name: 'newdockerized']], 
+          branches: [[name: 'v2_newdockerized']], 
           doGenerateSubmoduleConfigurations: false, 
           extensions: [], 
           submoduleCfg: [], 
@@ -15,15 +15,15 @@ node {
    
    stage('Clean'){
        sshagent (credentials: ['PK']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 129.114.104.65 rm -f /home/satyamsah/build.sh'
-            sh 'scp "/var/lib/jenkins/workspace/test/assignment2/build.sh" satyam1@129.114.104.65:/home/satyamsah/'
+            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 <remote-ip> rm -f /home/satyamsah/build.sh'
+            sh 'scp "/var/lib/jenkins/workspace/test/assignment2/build.sh" satyam1@<remote-ip>5:/home/satyamsah/'
         }
     }
        
   
    stage('Build') {
       sshagent (credentials: ['PK']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 129.114.104.65 sudo bash /home/satyamsah/build.sh'
+            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 <remote-ip> sudo bash /home/satyamsah/build.sh'
     }
    }
 }
