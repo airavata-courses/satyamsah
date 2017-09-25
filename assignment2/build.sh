@@ -7,6 +7,7 @@ echo IN::$PWD;
 sudo docker rm -f $(sudo docker ps -a -q) || echo No Docker images
 # Delete all images
 #sudo docker rmi -f $(sudo docker images -q) || echo No Docker containers
+
 sleep 5
 sudo docker build -f web-interfaces/Dockerfile -t web-interface-image web-interfaces
 sleep 5 
@@ -24,7 +25,7 @@ sleep 5
 
 sudo docker build -f gateway-api/Dockerfile -t gateway-image gateway-api
 sleep 5 
-sudo docker run -d --name webui-container --hostname webui-container -p 8090:8090 gateway-image
+sudo docker run -d --name gateway-container --hostname gateway-container -p 9999:9999 gateway-image
 sleep 5
 
 sudo docker run -d --name fetch-salary-container --hostname fetch-salary-container -p 3000:3000 --link rmq-container --link mysql-container satyamsah/fetch-salary-image

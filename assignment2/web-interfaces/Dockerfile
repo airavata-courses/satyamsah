@@ -22,10 +22,6 @@ RUN apt-get -y install maven
 
 RUN mvn install
 
-RUN chmod 777 sleep.sh
-
-RUN ./sleep.sh
-
 RUN cd target
 
 CMD ["java","-jar","demo-0.0.1-SNAPSHOT.jar"] 
