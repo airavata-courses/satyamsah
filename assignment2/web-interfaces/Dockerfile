@@ -22,6 +22,6 @@ RUN apt-get -y install maven
 
 RUN mvn install
 
-RUN cd target
+WORKDIR target
 
 CMD ["java","-jar","demo-0.0.1-SNAPSHOT.jar"] 
