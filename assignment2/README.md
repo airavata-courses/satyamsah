@@ -68,8 +68,7 @@ Secondly I have my RQM continainer running on the same server as micorservices. 
 
 1) jenkins should be installed
 2) private key of the known which needed to be fed in jenkins as credentials. If the reviewer wants private key messge me
-3) Put the contents of [jenkinsfile](https://github.com/airavata-courses/satyamsah/blob/newdockerized/assignment2/jenkinsfile) inside pipeline build script. Save and build it.
-
+3)  Put the contents of [jenkinsfile](https://github.com/airavata-courses/satyamsah/edit/v2_newdockerized/assignment2/jenkinsfile) inside pipeline build script.Remember to change the value of `<remote-ip>`to the IP where you want to run the micorservices. Save and build it.
 4) The whole system including 6 container will take 5 mins to build. 
 
 #### Proper Use-case scenario for testing end-to-end integration: 
