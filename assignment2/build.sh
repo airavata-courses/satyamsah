@@ -4,9 +4,9 @@
 echo -------------Build started-------------
 echo IN::$PWD;
 # Delete all containers
-sudo docker rm -f $(sudo docker ps -a -q) || echo No Docker images
+sudo docker rm -f $(sudo docker ps -a -q) || echo No Docker containers
 # Delete all images
-#sudo docker rmi -f $(sudo docker images -q) || echo No Docker containers
+sudo docker rmi -f $(sudo docker images -q) || echo No Docker images
 
 sleep 5
 sudo docker build -f web-interfaces/Dockerfile -t web-interface-image web-interfaces

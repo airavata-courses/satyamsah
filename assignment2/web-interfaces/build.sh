@@ -2,6 +2,9 @@
 
 ip=`curl -i -H "Accept: application/json" -H "Content-Type: application/json" https://ipv4.icanhazip.com/ | tail -n 1`
 
+sleep 15
+
+echo java -version
 echo $ip
 
 sed -i -e "s/localhost/$ip/g" src/main/resources/static/addemployee.html

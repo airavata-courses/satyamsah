@@ -12,16 +12,18 @@ RUN ls
 
 RUN chmod 777 build.sh
 
-CMD ["bash", "build.sh"]
+RUN ["/bin/bash","-c","/javadir/build.sh"]
+
+#CMD cat src/main/resources/static/addemployee.html
 
 RUN apt-get -y update
 
-RUN java -version
+#RUN java -version
 
 RUN apt-get -y install maven
 
-RUN mvn install
+RUN ["mvn","install"]
 
 WORKDIR target
 
-CMD ["java","-jar","demo-0.0.1-SNAPSHOT.jar"] 
+ENTRYPOINT ["java","-jar","demo-0.0.1-SNAPSHOT.jar"] 
