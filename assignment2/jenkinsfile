@@ -14,15 +14,16 @@ node {
    
    stage('Clean'){
        sshagent (credentials: ['PK']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 <remote-ip> rm -rf /home/satyam1/assignment2'
-            sh 'scp -r "/var/lib/jenkins/workspace/test/assignment2" satyam1@<remote-ip>:/home/satyam1/assignment2'
+            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 129.114.17.65 rm -rf /home/satyam1/assignment2'
+            sh 'scp -r "/var/lib/jenkins/workspace/tttty/assignment2" satyam1@129.114.17.65:/home/satyam1/assignment2'
         }
     }
        
   
    stage('Build') {
       sshagent (credentials: ['PK']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l satyam1 <remote-ip> sudo bash /home/satyam1/assignment2/build.sh'
+             sh 'ssh -o StrictHostKeyChecking=no -l satyam1 129.114.17.65 "cd ~/assignment2; sudo bash build.sh"'
+
     }
    }
 }
